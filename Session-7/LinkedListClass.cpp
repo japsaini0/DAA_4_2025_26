@@ -79,7 +79,9 @@ class Nop
     {
         if(head == NULL) return;
 
+        node * temp = head;
         head = head->next;
+        delete temp;
     }
 
     void Insertlocation(node * &head, int x, int pos)
