@@ -125,9 +125,10 @@ class Nop
         }
 
         prev->next = curr->next;
-        delete curr;
+        delete curr; 
     }
 };
+
 
 int main()
 {
