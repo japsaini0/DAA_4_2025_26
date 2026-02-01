@@ -49,16 +49,17 @@ int main() {
 
 
 
-// USED TEST CASE
-// Input:
-// 6
-//P    
+// Sample Input
+//9
+//P 
+//P
 //P
 //A
 //A
+//A
 //P
+//A
 //P
-
 // OUTPUT
 
-// 4   
+//8   
