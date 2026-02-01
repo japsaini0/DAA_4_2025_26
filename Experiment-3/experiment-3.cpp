@@ -7,38 +7,33 @@
 using namespace std;
 
 int main() {
-    int N;
-    cin >> N;
+    int n;
+    cin >> n;
 
 
-    //Taking Input
+    //Input here
 
-    vector<char> attendanceWindowVector(N);
-    for (int i = 0; i < N; i++) {
-        cin >> attendanceWindowVector[i];
+    vector<char> attendanceVector(n);
+    for (int i = 0; i < n; i++) {
+        cin >> attendanceVector[i];
     }
 
     unordered_map<int, int> mp; //used unordered_map
     
-    mp[0] = -1; //I Used this to handle Edge Case
+    mp[0] = -1; 
 
-
-    //Variables needed for Calculation
     int currentSum = 0;
     int maxLength = 0;
 
 
-    //Finding Prefix Sum and Maximum Length [added 1 for 'P' and -1 for 'A']
-
-    for (int i = 0; i < N; i++) {
-        if (attendanceWindowVector[i] == 'P') {
+    for (int i = 0; i < n; i++) {
+        if (attendanceVector[i] == 'P') {
             currentSum += 1;
         } else {
             currentSum -= 1;
         }
 
 
-        //checking if currentSum is already in map
         if (mp.find(currentSum) != mp.end()) {
             int windowLength = i - mp[currentSum];
             maxLength = max(maxLength, windowLength);
