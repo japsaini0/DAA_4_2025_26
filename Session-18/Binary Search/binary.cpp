@@ -3,12 +3,12 @@ using namespace std;
 
 int bSearch(int arr[], int n, int key)
 {
-    int s = 0;
+    int st = 0;
     int end = n - 1;
 
-    while(s <= end)
+    while(st <= end)
     {
-        int mid = (s + end)/2;
+        int mid = st + (end - st)/2;
 
         if(arr[mid] > key)
         {
@@ -17,7 +17,7 @@ int bSearch(int arr[], int n, int key)
 
         else if(arr[mid] < key)
         {
-            s = mid + 1;
+            st = mid + 1;
         }
 
         else
