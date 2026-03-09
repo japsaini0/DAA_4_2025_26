@@ -43,6 +43,8 @@ public:
             head->next = last;
 
             last = temp;
+
+            head = head->next->next;
         }
     }
 };
