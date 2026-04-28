@@ -1,38 +1,47 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <climits>
 using namespace std;
 
-int min_cost = INT_MAX;
+int ans;
 
-void tsp(vector<vector<int>>& graph, vector<bool>& visited, int currPos, int n, int count, int cost)
+void tspBacktrack(vector<vector<int>>& cost, vector<bool>& visited, int curr, int n, int count, int currCost)
 {
-    if(count == n && graph[currPos][0] > 0)
+    if(count == n)
     {
-        min_cost = min(min_cost, cost + graph[currPos][0]);
+        ans = min(ans, currCost + cost[curr][0]);
         return;
     }
 
-    for(int nextCity = 0; nextCity < n; nextCity++)
+    for(int i = 0; i < n; i++)
     {
-        if(!visited[nextCity] && graph[currPos][nextCity] > 0)
+        if(!visited[i] && currCost + cost[curr][i] < ans)
         {
-            visited[nextCity] = true;
-            tsp(graph, visited, nextCity, n, count + 1, cost + graph[currPos][nextCity]);
-            visited[nextCity] = false;
+            visited[i] = true;
+            tspBacktrack(cost, visited, i, n, count + 1, currCost + cost[curr][i]);
+            visited[i] = false;
         }
     }
 }
 
+int tsp(vector<vector<int>>& cost)
+{
+    int n = cost.size();
+    vector<bool> visited(n, false);
+    ans = INT_MAX;
+
+    visited[0] = true;
+    tspBacktrack(cost, visited, 0, n, 1, 0);
+
+    return ans;
+}
+
 int main()
 {
-    int n = 4;
-    vector<vector<int>> graph = {{0, 10, 15, 20}, {10, 0, 35, 25}, {15, 35, 0, 30}, {20, 25, 30, 0}};
+    vector<vector<int>> cost = {{0, 10, 15, 20}, {10, 0, 35, 25}, {15, 35, 0, 30}, {20, 25, 30, 0}};
 
-    vector<bool> visited(n, false);
-    visited[0] = true;
-    
-    tsp(graph, visited, 0, n, 1, 0);
-
-    cout<<min_cost<<endl;
+    int res = tsp(cost);
+    cout << res << endl;
 
     return 0;
 }
